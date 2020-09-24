@@ -1,3 +1,8 @@
+.container {
+  max-height: calc(100vh - 110px);
+  overflow-y: scroll;
+}
+
 .table {
   border-collapse: collapse;
 }
