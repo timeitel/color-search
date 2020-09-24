@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import fs from 'fs';
 
-export default function Home() {
+export default function Home({ colors }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,3 +15,13 @@ export default function Home() {
     </div>
   );
 }
+
+// read in colors array
+export const getStaticProps = async () => {
+  const file = fs.readFileSync(`${process.cwd()}/public/xkcd.json`);
+  const { colors } = JSON.parse(file);
+
+  return {
+    props: { colors }
+  };
+};
