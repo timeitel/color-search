@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import fs from 'fs';
+import ColorSearch from '../components/ColorSearch/colorsearch';
 
 export default function Home({ colors }) {
   return (
@@ -9,7 +10,9 @@ export default function Home({ colors }) {
         <title>Color Search | Tim Eitel</title>
       </Head>
 
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <ColorSearch />
+      </main>
 
       <footer className={styles.footer}></footer>
     </div>
