@@ -1,10 +1,16 @@
 import Table from '../Table/table';
 
 const colorsearch = ({ colors }) => {
+  const inputStyle = {
+    margin: '10px 0px',
+    border: '1px solid gray',
+    padding: '2px 5px'
+  };
+
   return (
     <>
-      <h2>Colors</h2>
-      <input placeholder='Enter	Hex Color Code' />
+      <h2 style={{ margin: '0' }}>Colors</h2>
+      <input style={inputStyle} placeholder='Enter Hex Color Code' />
       <Table colors={colors} />
     </>
   );

@@ -1,3 +1,5 @@
+import styles from './Table.module.css';
+
 const table = ({ colors }) => {
   const rows = colors.map(({ color, hex }) => {
     return (
@@ -9,7 +11,7 @@ const table = ({ colors }) => {
   });
 
   return (
-    <table>
+    <table className={styles.table}>
       <tbody>
         <tr>
           <th>Name</th>
