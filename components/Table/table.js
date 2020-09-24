@@ -4,7 +4,13 @@ const table = ({ colors }) => {
   const rows = colors.map(({ color, hex }) => {
     return (
       <tr key={hex}>
-        <td></td>
+        <td
+          style={{
+            backgroundColor: `${hex}`,
+            width: '100px',
+            height: '40px'
+          }}
+        ></td>
         <td>{color}</td>
         <td>{hex.toUpperCase()}</td>
         <td>{hexToRGB(hex)}</td>

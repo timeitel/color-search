@@ -4,7 +4,8 @@ const colorsearch = ({ colors }) => {
   const inputStyle = {
     margin: '10px 0px',
     border: '1px solid gray',
-    padding: '2px 5px'
+    padding: '2px 5px',
+    height: '30px'
   };
 
   return (
