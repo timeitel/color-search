@@ -1,5 +1,26 @@
 const table = ({ colors }) => {
-  return <div>table</div>;
+  const rows = colors.map(({ color, hex }) => {
+    return (
+      <tr key={hex}>
+        <td>{color}</td>
+        <td>{hex}</td>
+      </tr>
+    );
+  });
+
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Hex</th>
+          <th>RGB</th>
+          <th>CMYK</th>
+        </tr>
+        {rows}
+      </tbody>
+    </table>
+  );
 };
 
 export default table;

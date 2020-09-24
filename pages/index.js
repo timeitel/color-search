@@ -11,7 +11,7 @@ export default function Home({ colors }) {
       </Head>
 
       <main className={styles.main}>
-        <ColorSearch />
+        <ColorSearch colors={colors} />
       </main>
 
       <footer className={styles.footer}></footer>
