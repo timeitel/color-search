@@ -6,7 +6,7 @@ const table = ({ colors }) => {
       <tr key={hex}>
         <td></td>
         <td>{color}</td>
-        <td>{hex}</td>
+        <td>{hex.toUpperCase()}</td>
         <td>{hexToRGB(hex)}</td>
         <td>{hexToCMYK(hex)}</td>
       </tr>
