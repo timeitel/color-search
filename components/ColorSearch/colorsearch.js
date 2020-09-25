@@ -13,6 +13,12 @@ const colorsearch = ({ colors }) => {
     margin: '0'
   };
 
+  const repoStyle = {
+    position: 'absolute',
+    top: '5%',
+    right: '5%'
+  };
+
   const [searchString, setSearchString] = useState('');
   const [colorsState, setColorsState] = useState(colors);
 
@@ -24,6 +30,7 @@ const colorsearch = ({ colors }) => {
       return;
     }
 
+    // add a ranking property to color objects
     const rankedArray = colors.map((item) => {
       // rank item(color object) by how many of it's color property characters match the searchString
       const rank = searchString.split('').reduce((acc, ch) => {
@@ -33,6 +40,7 @@ const colorsearch = ({ colors }) => {
       return { ...item, rank };
     });
 
+    // sort color objects by the added rank property and return the first 50
     const sortedArray = rankedArray.sort(sortByRank).splice(0, 50);
 
     setColorsState(sortedArray);
@@ -41,6 +49,13 @@ const colorsearch = ({ colors }) => {
   return (
     <>
       <h2 style={h2Style}>Colors</h2>
+      <a
+        href='https://github.com/timeitel/color-search'
+        target='_blank'
+        style={repoStyle}
+      >
+        <img src='/github.png' />
+      </a>
       <input
         onKeyDown={handleSearch}
         onChange={(e) => setSearchString(e.target.value.toLowerCase())}
