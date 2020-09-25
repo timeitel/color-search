@@ -32,10 +32,13 @@ const colorsearch = ({ colors }) => {
 
     // add a ranking property to color objects
     const rankedArray = colors.map((item) => {
-      // rank item(color object) by how many of it's color property characters match the searchString
-      const rank = searchString.split('').reduce((acc, ch) => {
-        return item.color.includes(ch) ? acc + 1 : acc;
-      }, 0);
+      // rank item's (color object's) similarity to the search string
+      const rank = similarity(searchString, item.hex);
+
+      // personal function to rank substring matching - simple and character based
+      // const rank = searchString.split('').reduce((acc, ch) => {
+      //   return item.color.includes(ch) ? acc + 1 : acc;
+      // }, 0);
 
       return { ...item, rank };
     });
@@ -72,4 +75,45 @@ export default colorsearch;
 // helper function to sort color object by rank property
 function sortByRank(a, b) {
   return a.rank < b.rank ? 1 : -1;
+}
+
+// helper functions for fuzzy substring matching using the Levenshtein Algorithm - https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
+function similarity(s1, s2) {
+  var longer = s1;
+  var shorter = s2;
+  if (s1.length < s2.length) {
+    longer = s2;
+    shorter = s1;
+  }
+  var longerLength = longer.length;
+  if (longerLength == 0) {
+    return 1.0;
+  }
+  return (
+    (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength)
+  );
+}
+
+function editDistance(s1, s2) {
+  s1 = s1.toLowerCase();
+  s2 = s2.toLowerCase();
+
+  var costs = new Array();
+  for (var i = 0; i <= s1.length; i++) {
+    var lastValue = i;
+    for (var j = 0; j <= s2.length; j++) {
+      if (i == 0) costs[j] = j;
+      else {
+        if (j > 0) {
+          var newValue = costs[j - 1];
+          if (s1.charAt(i - 1) != s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+    }
+    if (i > 0) costs[s2.length] = lastValue;
+  }
+  return costs[s2.length];
 }
